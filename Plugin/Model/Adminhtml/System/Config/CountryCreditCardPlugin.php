@@ -26,8 +26,8 @@ class CountryCreditCardPlugin
 
     public function aroundBeforeSave(\Magento\Braintree\Model\Adminhtml\System\Config\CountryCreditCard $subject, callable $proceed)
     {
-        $proceed();
-        $value = $this->getValue();
+        //$proceed();
+        $value = $subject->getValue();
         $result = [];
         if (is_array($value)) {
             foreach ($value as $data) {
