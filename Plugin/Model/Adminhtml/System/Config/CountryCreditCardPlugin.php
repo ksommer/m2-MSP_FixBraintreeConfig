@@ -15,22 +15,34 @@ class CountryCreditCardPlugin
     private $serializer;
 
     /**
+     * Logger.
+     *
+     * @var \Psr\Log\LoggerInterface
+     */
+    private $logger;
+
+    /**
      * @param \Magento\Framework\Serialize\Serializer\Json $serializer
+     * @param \Psr\Log\LoggerInterface $logger
      */
     public function __construct(
         \Magento\Framework\Serialize\Serializer\Json $serializer = null
     ) {
         $this->serializer = $serializer ?: \Magento\Framework\App\ObjectManager::getInstance()
             ->get(\Magento\Framework\Serialize\Serializer\Json::class);
+        $this->logger = $logger;
     }
 
     public function aroundBeforeSave(\Magento\Braintree\Model\Adminhtml\System\Config\CountryCreditCard $subject, callable $proceed)
     {
+        $proceed();
 
-        $value = json_decode(
-            $subject->getValue(\Magento\Braintree\Gateway\Config\Config::KEY_COUNTRY_CREDIT_CARD),
-            true
-        );
+        $value = null;
+        try {
+            $value = $this->serializer->unserialize($this->getValue());
+        } catch (\Exception $e) {
+            $this->logger->error($e->getMessage());
+        }
 
         $result = [];
         if (is_array($value)) {
