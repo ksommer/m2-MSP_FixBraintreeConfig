@@ -5,7 +5,7 @@
  * Date: 15/12/17
  * Time: 11.49
  */
-namespace MSP\Issue12298\Plugin\Model\Adminhtml\System\Config;
+namespace MSP\FixBraintreeConfig\Plugin\Model\Adminhtml\System\Config;
 
 class CountryCreditCardPlugin
 {

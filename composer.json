@@ -1,5 +1,5 @@
 {
-    "name": "msp/issue12298",
+    "name": "msp/fixbraintreeconfig",
     "description": "",
     "require": {
         "php": "~5.5.0|~5.6.0|~7.0.0",
@@ -19,14 +19,14 @@
             "registration.php"
         ],
         "psr-4": {
-            "MSP\\Issue12298\\": ""
+            "MSP\\FixBraintreeConfig\\": ""
         }
     },
     "extra": {
         "map": [
             [
                 "*",
-                "MSP/Issue12298"
+                "MSP/FixBraintreeConfig"
             ]
         ]
     }
